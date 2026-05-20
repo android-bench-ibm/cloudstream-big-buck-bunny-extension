@@ -1,19 +1,13 @@
-name: Build and Release
+name: Build
 
 on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '*.md'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # This block explicitly grants the workflow permission to create releases
-    permissions:
-      contents: write
-      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -28,12 +22,10 @@ jobs:
           chmod +x gradlew
           ./gradlew make makePluginsJson
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
         with:
-          tag_name: v1.0.${{ github.run_number }}
-          files: |
+          name: CloudStream-Plugins
+          path: |
             **/build/*.cs3
             build/plugins.json
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
