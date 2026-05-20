@@ -1,7 +1,11 @@
 package com.example
 
+import android.annotation.SuppressLint
+import android.media.Rating
 import com.lagradost.cloudstream3.*
+import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.utils.*
+import com.lagradost.cloudstream3.Score
 
 class ExampleProvider : MainAPI() {
     // This is the name that will actually show up in the CloudStream app
@@ -28,9 +32,24 @@ class ExampleProvider : MainAPI() {
         return listOf(item)
     }
 
+    @SuppressLint("RestrictedApi")
     override suspend fun load(url: String): LoadResponse {
         return newMovieLoadResponse("Big Buck Bunny", url, TvType.Movie, url) {
             this.posterUrl = bbbPoster
+            this.plot = "A large and lovable giant rabbit confronts three mischievous rodents who torment him and ruin his day, leading to a series of comical, trap-filled retaliations."
+
+            this.posterUrl = "https://upload.wikimedia.org/wikipedia/commons/c/c5/Big_Buck_Bunny_Main_Poster.jpg"
+            this.plot = "A large and lovable giant rabbit confronts three mischievous rodents who torment him and ruin his day."
+
+            this.year = 2008
+            this.duration = 10
+            this.tags = listOf("Animation", "Comedy", "Short", "Family")
+
+            this.score = Score.from(6.4, 10)
+
+            this.backgroundPosterUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Big_Buck_Bunny_Main_Poster.jpg/800px-Big_Buck_Bunny_Main_Poster.jpg"
+
+            addActors(listOf("Bunny", "Frank the Squirrel", "Rinky the Flying Squirrel"))
         }
     }
 
