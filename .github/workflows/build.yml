@@ -25,16 +25,15 @@ jobs:
           chmod +x gradlew
           ./gradlew make makePluginsJson
           
-          # MAGIC FIX: Automatically swap the non-existent 'builds' branch link with your working GitHub Pages link
+          # Fix the URL inside the JSON
           sed -i 's|https://raw.githubusercontent.com/android-bench-ibm/cloudstream-big-buck-bunny-extension/builds|https://android-bench-ibm.github.io/cloudstream-big-buck-bunny-extension|g' build/plugins.json
           
           # Create a clean folder for deployment
           mkdir -p deploy
+          
+          # FIX: Stop GitHub from blocking .cs3 files
+          touch deploy/.nojekyll
+          
+          # Copy files over
           cp **/build/*.cs3 deploy/
           cp build/plugins.json deploy/
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./deploy
