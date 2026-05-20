@@ -4,30 +4,33 @@ import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
 
 class ExampleProvider : MainAPI() {
-    override var name = "Big Buck Mock"
-    override var mainUrl = "http://localhost:8080"
+    // This is the name that will actually show up in the CloudStream app
+    override var name = "Big Buck Bunny"
+    override var mainUrl = "https://peach.blender.org"
     override var supportedTypes = setOf(TvType.Movie)
     override val hasMainPage = true
 
+    // Real public URLs for testing
+    private val bbbPoster = "https://upload.wikimedia.org/wikipedia/commons/c/c5/Big_buck_bunny_poster_big.jpg"
+    private val bbbVideoUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+
     override suspend fun getMainPage(page: Int, requestStep: MainPageRequest): HomePageResponse {
-        val item = newMovieSearchResponse("Big Buck Bunny", "http://localhost:8080/bbb.mp4") {
-            this.posterUrl = "http://localhost:8080/bbb_poster.jpg"
+        val item = newMovieSearchResponse("Big Buck Bunny", bbbVideoUrl) {
+            this.posterUrl = bbbPoster
         }
         return newHomePageResponse("Mock Releases", listOf(item))
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-        val item = newMovieSearchResponse("Big Buck Bunny", "http://localhost:8080/bbb.mp4") {
-            this.posterUrl = "http://localhost:8080/bbb_poster.jpg"
+        val item = newMovieSearchResponse("Big Buck Bunny", bbbVideoUrl) {
+            this.posterUrl = bbbPoster
         }
         return listOf(item)
     }
 
     override suspend fun load(url: String): LoadResponse {
         return newMovieLoadResponse("Big Buck Bunny", url, TvType.Movie, url) {
-            this.posterUrl = "http://localhost:8080/bbb_poster.jpg"
-            this.backgroundPosterUrl = "http://localhost:8080/bbb_header.jpg"
-            this.plot = "A large and lovable rabbit deals with three bullying rodents."
+            this.posterUrl = bbbPoster
         }
     }
 
@@ -37,12 +40,12 @@ class ExampleProvider : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        // Simplified call to avoid parameter errors, letting the API handle defaults
+        // Stripped down to core parameters to match the new factory function signature
         callback(
             newExtractorLink(
-                source = "Mock",
-                name = "Local 1080p",
-                url = "http://localhost:8080/bbb.mp4"
+                source = "Blender",
+                name = "1080p MP4",
+                url = data
             )
         )
         return true
