@@ -16,7 +16,7 @@ class ExampleProvider : MainAPI() {
 
     // Real public URLs for testing
     private val bbbPoster = "https://upload.wikimedia.org/wikipedia/commons/c/c5/Big_buck_bunny_poster_big.jpg"
-    private val bbbVideoUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    private val bbbVideoUrl = "https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
 
     override suspend fun getMainPage(page: Int, requestStep: MainPageRequest): HomePageResponse {
         val item = newMovieSearchResponse("Big Buck Bunny", bbbVideoUrl) {
@@ -44,7 +44,7 @@ class ExampleProvider : MainAPI() {
 
             this.score = Score.from(6.4, 10)
 
-            this.backgroundPosterUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Big_Buck_Bunny_Main_Poster.jpg/800px-Big_Buck_Bunny_Main_Poster.jpg"
+            this.backgroundPosterUrl = "https://peach.blender.org/wp-content/uploads/bbb-splash.png"
 
             addActors(listOf("Bunny", "Frank the Squirrel", "Rinky the Flying Squirrel"))
         }
