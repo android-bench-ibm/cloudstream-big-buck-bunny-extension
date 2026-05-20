@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Required for the deployment action
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -24,6 +24,10 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew make makePluginsJson
+          
+          # MAGIC FIX: Automatically swap the non-existent 'builds' branch link with your working GitHub Pages link
+          sed -i 's|https://raw.githubusercontent.com/android-bench-ibm/cloudstream-big-buck-bunny-extension/builds|https://android-bench-ibm.github.io/cloudstream-big-buck-bunny-extension|g' build/plugins.json
+          
           # Create a clean folder for deployment
           mkdir -p deploy
           cp **/build/*.cs3 deploy/
