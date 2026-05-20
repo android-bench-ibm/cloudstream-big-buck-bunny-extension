@@ -38,9 +38,6 @@ class ExampleProvider : MainAPI() {
             this.posterUrl = bbbPoster
             this.plot = "A large and lovable giant rabbit confronts three mischievous rodents who torment him and ruin his day, leading to a series of comical, trap-filled retaliations."
 
-            this.posterUrl = "https://upload.wikimedia.org/wikipedia/commons/c/c5/Big_Buck_Bunny_Main_Poster.jpg"
-            this.plot = "A large and lovable giant rabbit confronts three mischievous rodents who torment him and ruin his day."
-
             this.year = 2008
             this.duration = 10
             this.tags = listOf("Animation", "Comedy", "Short", "Family")
