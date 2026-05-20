@@ -10,8 +10,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # This block explicitly grants the workflow permission to create releases
     permissions:
-      contents: write # Required to create releases
+      contents: write
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@master
