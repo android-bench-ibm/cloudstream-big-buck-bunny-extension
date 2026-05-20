@@ -25,15 +25,33 @@ jobs:
           chmod +x gradlew
           ./gradlew make makePluginsJson
           
-          # Fix the URL inside the JSON
+          # Fix the URL inside the plugins.json
           sed -i 's|https://raw.githubusercontent.com/android-bench-ibm/cloudstream-big-buck-bunny-extension/builds|https://android-bench-ibm.github.io/cloudstream-big-buck-bunny-extension|g' build/plugins.json
           
           # Create a clean folder for deployment
           mkdir -p deploy
           
-          # FIX: Stop GitHub from blocking .cs3 files
+          # Prevent GitHub Pages from hiding or blocking .cs3 files
           touch deploy/.nojekyll
           
-          # Copy files over
-          cp **/build/*.cs3 deploy/
+          # Generate the repo.json wrapper file that CloudStream strictly requires
+          cat << 'EOF' > deploy/repo.json
+          {
+            "name": "Big Buck Bunny Repo",
+            "description": "Custom CloudStream Extension Repository",
+            "manifestVersion": 1,
+            "pluginLists": [
+              "https://android-bench-ibm.github.io/cloudstream-big-buck-bunny-extension/plugins.json"
+            ]
+          }
+          EOF
+          
+          # Copy compiled extensions and the plugin index over to deployment
+          cp **/build/*.cs3 deploy/ || true
           cp build/plugins.json deploy/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./deploy
