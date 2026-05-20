@@ -1,4 +1,4 @@
-name: Build
+name: Build and Deploy
 
 on:
   push:
@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required for the deployment action
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -22,11 +24,13 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew make makePluginsJson
+          # Create a clean folder for deployment
+          mkdir -p deploy
+          cp **/build/*.cs3 deploy/
+          cp build/plugins.json deploy/
 
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: CloudStream-Plugins
-          path: |
-            **/build/*.cs3
-            build/plugins.json
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./deploy
