@@ -1,0 +1,8 @@
+{
+  "name": "Big Buck Bunny Repo",
+  "description": "Custom CloudStream Extension Repository",
+  "manifestVersion": 1,
+  "pluginLists": [
+    "https://android-bench-ibm.github.io/cloudstream-big-buck-bunny-extension/plugins.json"
+  ]
+}

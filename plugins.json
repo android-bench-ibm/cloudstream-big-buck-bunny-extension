@@ -1,0 +1,23 @@
+[
+    {
+        "iconUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Korduene_Logo.png",
+        "fileHash": "sha256-61caedabb84d161adc9498932e5ab88942820fb22dd26fd1d6f963a3cd44d10b",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/android-bench-ibm/cloudstream-big-buck-bunny-extension",
+        "fileSize": 10540,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Cloudburst",
+            "Luna712"
+        ],
+        "tvTypes": [
+            "Movie"
+        ],
+        "version": 1,
+        "internalName": "ExampleProvider",
+        "description": "Lorem ipsum",
+        "url": "https://android-bench-ibm.github.io/cloudstream-big-buck-bunny-extension/ExampleProvider.cs3",
+        "name": "ExampleProvider"
+    }
+]
