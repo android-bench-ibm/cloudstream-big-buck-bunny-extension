@@ -22,7 +22,7 @@ class ExampleProvider : MainAPI() {
         val item = newMovieSearchResponse("Big Buck Bunny", bbbVideoUrl) {
             // Serve the splash image directly to the SearchResponse payload
             // so the Compose UI receives it immediately
-            this.posterUrl = "https://peach.blender.org/wp-content/uploads/bbb-splash.png"
+            this.posterUrl = bbbPoster
         }
         return newHomePageResponse("Mock Releases", listOf(item))
     }
