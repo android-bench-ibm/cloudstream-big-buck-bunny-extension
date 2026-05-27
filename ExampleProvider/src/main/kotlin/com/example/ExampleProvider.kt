@@ -19,9 +19,8 @@ class ExampleProvider : MainAPI() {
     private val bbbVideoUrl = "https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
 
     override suspend fun getMainPage(page: Int, requestStep: MainPageRequest): HomePageResponse {
+        // If your home page row items must be SearchResponse, use the portrait poster:
         val item = newMovieSearchResponse("Big Buck Bunny", bbbVideoUrl) {
-            // Serve the splash image directly to the SearchResponse payload
-            // so the Compose UI receives it immediately
             this.posterUrl = bbbPoster
         }
         return newHomePageResponse("Mock Releases", listOf(item))
