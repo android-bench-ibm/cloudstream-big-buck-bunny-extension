@@ -50,14 +50,19 @@ class ExampleProvider : MainAPI() {
             addActors(listOf("Bunny", "Frank the Squirrel", "Rinky the Flying Squirrel"))
         }
     }
-
     override suspend fun loadLinks(
         data: String,
         isCasting: Boolean,
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        // Stripped down to core parameters to match the new factory function signature
+        subtitleCallback(
+            SubtitleFile(
+                lang = "English",
+                url = "https://raw.githubusercontent.com/demuxed/big-buck-captions/refs/heads/main/big-buck-bunny.srt"
+            )
+        )
+    
         callback(
             newExtractorLink(
                 source = "Blender",
