@@ -16,7 +16,7 @@ class ExampleProvider : MainAPI() {
 
     // Real public URLs for testing
     private val bbbPoster = "https://upload.wikimedia.org/wikipedia/commons/c/c5/Big_buck_bunny_poster_big.jpg"
-    private val bbbVideoUrl = "https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
+    private val bbbVideoUrl = "BigBuckBunny_320x180.mp4"
 
     override suspend fun getMainPage(page: Int, requestStep: MainPageRequest): HomePageResponse {
         // If your home page row items must be SearchResponse, use the portrait poster:
